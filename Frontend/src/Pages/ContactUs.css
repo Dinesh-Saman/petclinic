@@ -1,0 +1,47 @@
+.container {
+    text-align: center;
+  }
+
+  .form-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-direction: column; /* Align items in column */
+    margin-top: 70px;
+  }
+  
+
+  .title-main {
+    color: blue;
+    text-align: center;
+  }
+  
+  .sub-title-main {
+    color: blue;
+    font-size: 20px;
+    margin-top: 40px;
+  }
+
+  .sub-title-contact{
+    text-align: left;
+  }
+  
+  .sub-section {
+    text-align: left;
+    margin-left: 350px;
+  }
+  
+  .sub-section h3 {
+    color: blue;
+  }
+  
+  .contact-description {
+    margin-left: 350px;
+    margin-right: 350px;
+  }
+
+  .below-description {
+    margin-top: 40px;
+    margin-left: 300px;
+    margin-right: 300px;
+  }
