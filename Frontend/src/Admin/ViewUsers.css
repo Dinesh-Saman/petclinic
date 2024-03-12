@@ -2,7 +2,8 @@
 
 /* Style for the users table */
 .users-table {
-    width: 100%;
+    min-width: 900px;
+    max-width: 900px;
     border-collapse: collapse;
     margin-left: 15px;
   }
@@ -63,4 +64,14 @@
     color: rgb(194, 19, 194);
     margin-bottom: 20px;
     text-align: center;
+  }
+
+  .pet-image{
+    width: 100%;
+    height: auto;
+    border-radius: 0%;
+  }
+
+  .pet-image-cell{
+    width: 50px;
   }

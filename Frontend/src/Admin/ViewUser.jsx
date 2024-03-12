@@ -33,7 +33,7 @@ const ViewUsers = () => {
   const handleDelete = async (_id) => {
     try {
       console.log(`Deleting user with id ${_id}`);
-      await axios.delete(`http://localhost:3000/users/${_id}`);
+      await axios.delete(`http://localhost:3000/users/users/${_id}`);
       // Update the users state after deletion
       setUsers(prevUsers => prevUsers.filter(user => user._id !== _id));
     } catch (error) {
@@ -49,14 +49,13 @@ const ViewUsers = () => {
         <thead>
           <tr>
             <th>Full Name</th>
-            <th>Email</th>
             <th>Contact</th>
             <th>NIC</th>
+            <th>Pet Image</th> 
             <th>Pet Name</th>
             <th>Breed</th>
             <th>Gender</th>
             <th>Age</th>
-            <th>Pet Image</th> {/* New column for the pet image */}
             <th>Update</th>
             <th>Delete</th>
           </tr>
@@ -65,16 +64,15 @@ const ViewUsers = () => {
           {users.map(user => (
             <tr key={user._id}>
               <td>{user.fullName}</td>
-              <td>{user.email}</td>
               <td>{user.contact}</td>
               <td>{user.nic}</td>
+              <td className="pet-image-cell">
+                <img src={`http://localhost:3000/uploads/${user.petImage}`} alt={user.petName} className="pet-image" />
+              </td>
               <td>{user.petName}</td>
               <td>{user.breed}</td>
               <td>{user.gender}</td>
               <td>{user.age}</td>
-              <td>
-                <img src={`http://localhost:3000/uploads/${user.petImage}`} alt={user.petName} className="pet-image" />
-              </td>
               <td>
                 <button onClick={() => handleUpdate(user._id)} className='update'>Update</button>
               </td>

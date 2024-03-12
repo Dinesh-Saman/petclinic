@@ -418,4 +418,13 @@
   .contact-nic-row input:not(:last-child) {
     margin-right: 10px; /* Adjust spacing as needed */
   }
+
+  .genderdropdown {
+    background-color: #d5dbe0;
+    border: none;
+    border-radius: 10px;
+    width: 80%;
+    margin-left:20px;
+    height: 35px;
+  }
   

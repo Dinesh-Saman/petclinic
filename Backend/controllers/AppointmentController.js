@@ -82,7 +82,7 @@ class AppointmentController {
       if (!appointment) {
         return res.status(404).json({ message: 'Appointment not found' });
       }
-      await appointment.remove();
+      
       res.status(200).json({ message: 'Appointment deleted successfully' });
     } catch (error) {
       res.status(500).json({ error: error.message });

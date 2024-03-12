@@ -7,11 +7,14 @@
   
   /* Style for the admin sidebar */
   .admin-sidebar {
-    width: 250px; /* Adjust as needed */
+    width: 250px; /* Set the initial width */
+    min-width: 250px; /* Set the minimum width to the same value */
+    max-width: 250px; /* Set the maximum width to the same value */
     background-color: #453f4e; /* Sidebar background color */
     padding: 20px;
     height: 1000px; /* Adjust height as needed */
   }
+  
   
   /* Style for the main content area */
   .view-appointments {
@@ -29,3 +32,11 @@
   }
   
 
+  .view-users {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #ffffff;
+    margin: 20px;
+  }
+  

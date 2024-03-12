@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useRef} from 'react';
+import React, { useState , useRef} from 'react';
 import './Home.css';
 import Navbar from '../Components/Navbar';
 import Reviews from '../Components/Reviews'
@@ -8,7 +8,6 @@ import logo from '../Images/Frame 18.png'; // Import your logo image
 import backgroundImage from '../Images/Frame20.png'; 
 import axios from 'axios'; // Make sure axios is installed and imported
 import Swal from 'sweetalert2';
-import ProfileCircle from '../Components/ProfileCircle';
 
 
 const PopupCard = ({ onClose }) => {
@@ -152,12 +151,7 @@ const PopupCard = ({ onClose }) => {
               <input type="text" placeholder="Pet Name" value={petName} onChange={handleChangePetName} />
               <div className="breed-gender">
                 <input type="text" placeholder="Breed" value={breed} onChange={handleChangeBreed} />
-                <select value={gender} onChange={handleChangeGender} className='genderdropdown'>
-                  <option value="">Select Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                </select>
-
+                <input type="text" placeholder="Gender" value={gender} onChange={handleChangeGender} />
               </div>
               <input type="text" placeholder="Age" value={age} onChange={handleChangeAge} />
             </div>
@@ -175,13 +169,10 @@ const PopupCard = ({ onClose }) => {
 };
 
 
-const LoginPopupCard = ({ onClose, onLoginSuccess  }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUserName] = useState('');
+const LoginPopupCard = ({ onClose }) => {
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  
 
   const handleLogin = async () => {
     // Get email and password values from input fields
@@ -191,27 +182,19 @@ const LoginPopupCard = ({ onClose, onLoginSuccess  }) => {
     try {
       // Send login request to backend
       const response = await axios.post('http://localhost:3000/users/login', { email, password });
-      const token = response.data.token;
-      // Check if the user is an admin
-      if (email === 'admin@example.com' && password === 'adminPassword') {
-        // Redirect to admin panel
-        window.location.href = '../view-users'; // Replace '/admin-panel' with the route for your admin panel
-      } else {
-        // For regular users, fetch user details and handle login success
-        await fetchUserDetails(token, email);
-        // Display success message if login is successful
-        Swal.fire({
-          icon: 'success',
-          title: 'Login Successful',
-          text: 'You have been successfully logged in!',
-        }).then(() => {
-          onClose();
-          onLoginSuccess(response.data.name);
-          // Redirect to another page after successful login
-          // Use React Router or any navigation library for redirection
-          // Example: history.push('/dashboard');
-        });
-      }
+  
+      // Display success message if login is successful
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: 'You have been successfully logged in!',
+      }).then(() => {
+        onClose();
+        window.location.href = '../services';
+        // Redirect to another page after successful login
+        // Use React Router or any navigation library for redirection
+        // Example: history.push('/dashboard');
+      });
     } catch (error) {
       // Handle login error
       console.error('Login failed:', error);
@@ -223,28 +206,6 @@ const LoginPopupCard = ({ onClose, onLoginSuccess  }) => {
       });
     }
   
-  };
-
-  const fetchUserDetails = async (token, email) => {
-    try {
-      const response = await axios.post('http://localhost:3000/users/users/details', {email}, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const fullName = response.data.fullName;
-      setIsLoggedIn(true);
-      setUserName(fullName);
-    } catch (error) {
-      console.error('Error fetching user details:', error);
-      // Handle error (e.g., redirect to login page)
-    }
-  };
-
-  const handleLoginSuccess = (name) => {
-    setIsLoggedIn(true);
-    setUserName(name);
-    onLoginSuccess(name); 
   };
 
   return (
@@ -279,7 +240,7 @@ const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const [userName, setUserName] = useState('');
 
   const openPopup = () => {
     setShowPopup(true);
@@ -297,46 +258,16 @@ const Home = () => {
     setShowLoginPopup(false);
   };
 
-const handleLoginSuccess = (name) => {
-  setIsLoggedIn(true);
-  console.log("Name received:", name); // Debugging statement
-  console.log("Updated userName:", username.username); // Debugging statement
-  closeLoginPopup();
-};
-
+  const handleLoginSuccess = (name) => {
+    setIsLoggedIn(true);
+    setUserName(name);
+    closeLoginPopup();
+  };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
     setIsLoggedIn(false);
     setUserName('');
   };
-
-  useEffect(() => {
-    // Check if the user is logged in by checking local storage or session storage
-    const token = localStorage.getItem('token');
-    if (token) {
-      // If token exists, fetch user details using the token
-      fetchUserDetails(token);
-    }
-  }, []);
-
-  const fetchUserDetails = async (token) => {
-
-    try {
-      const response = await axios.post('http://localhost:3000/users/users/details', null, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const fullName = response.data.fullName;
-      setIsLoggedIn(true);
-      setUserName(fullName);
-    } catch (error) {
-      console.error('Error fetching user details:', error);
-      // Handle error (e.g., redirect to login page)
-    }
-  };
-
 
   return (
     <div className="home-container">
@@ -376,16 +307,18 @@ const handleLoginSuccess = (name) => {
        
           )}
           {isLoggedIn && (
-     
-              <span className="navbar-welcome">Welcome, {username}</span>
-       
+            <li>
+              <ProfileCircle name={userName} onClick={handleLogout} />
+            </li>
           )}
         </ul>
       </nav>
       {showPopup && <PopupCard onClose={closePopup} />}
       {showLoginPopup && <LoginPopupCard onClose={closeLoginPopup} onLoginSuccess={handleLoginSuccess} />}
-      </div>
+    </div>
     </nav>
+    {showPopup && <PopupCard onClose={closePopup} />}
+    {showLoginPopup && <LoginPopupCard onClose={closeLoginPopup} />}
       <div className="content-container">
         <div className="background-image" style={{backgroundImage: `url(${backgroundImage})`}}>
           <div className="overlay">

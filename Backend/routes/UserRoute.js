@@ -3,6 +3,8 @@ const router = express.Router();
 const UserController = require('../controllers/UserController');
 
 const userController = new UserController();
+const User = require('../models/UserModel');
+
 
 // Import multer and configure storage
 const multer = require('multer');
@@ -35,6 +37,27 @@ router.get('/users/:id', userController.getOneUser);
 
 // Delete a user route
 router.delete('/users/:id', userController.deleteUser);
+
+// Route to get user by email
+// Import necessary modules and User model
+
+router.post('/users/details', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    // Find the user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // If user found, return user details
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 module.exports = router;
 

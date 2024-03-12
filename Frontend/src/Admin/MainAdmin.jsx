@@ -7,14 +7,14 @@ const AdminSidebar = () => {
     <div className="admin-sidebar">
       <h3 className="sidebar-title">PET POWS</h3>
       <ul className="sidebar-menu">
+      <li className="sidebar-item">
+          <Link to="/view-users" className="sidebar-link">View All Users</Link>
+        </li>
         <li className="sidebar-item">
           <Link to="/add-appointment" className="sidebar-link">Add Appointment</Link>
         </li>
         <li className="sidebar-item">
           <Link to="/view-appointment" className="sidebar-link">View Appointments</Link>
-        </li>
-        <li className="sidebar-item">
-          <Link to="/view-users" className="sidebar-link">Users</Link>
         </li>
       </ul>
     </div>

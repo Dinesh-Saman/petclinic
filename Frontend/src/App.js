@@ -11,6 +11,7 @@ import ViewAppointment from './Admin/ViewAppointmentPage'
 import AddAppointment from './Admin/AddAppointmentPage'
 import Appointment from './Pages/Appointment'
 import ViewUsers from './Admin/ViewUserPage';
+import UserHome from './Pages/UserHome'
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="/add-appointment" element={<AddAppointment />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/view-users" element={<ViewUsers />} />
+          <Route path="/user-home" element={<UserHome />} />    
         </Routes>
       </div>
     </Router>
