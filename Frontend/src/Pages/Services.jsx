@@ -4,12 +4,9 @@ import Navbar from '../Components/Navbar';
 import Reviews from '../Components/Reviews'
 import Footer from '../Components/Footer'
 import './Services.css'
+import { Link } from 'react-router-dom'; // Import Link from React Router
 
 import backgroundImage from '../Images/Frame21.png'; 
-import dogFoodImage from '../Images/Frame 18.png';
-import catFoodImage from '../Images/Frame 18.png';
-import medicineImage from '../Images/Frame 18.png';
-import accessoriesImage from '../Images/Frame 18.png';
 import denticity from '../Images/image49.png'
 import diagnostics from '../Images/image50.png'
 import surgery from '../Images/image51.png'
@@ -31,7 +28,9 @@ const PopupCard = ({ selectedService, onClose }) => {
         <button className="close-btn" onClick={onClose}>
           <i className="fas fa-times" style={{ fontSize: "24px", backgroundColor: "red", padding: "10px", color: "white", marginTop:'9px', marginRight:'5px'}}></i> {/* Cross icon */}
         </button>
-        <button className="book-appointment-btn">Book Appointment</button>
+        <Link to='../appointment'>
+          <button className="book-appointment-btn">Book Appointment</button>
+        </Link>
       </div>
     </div>
   );
