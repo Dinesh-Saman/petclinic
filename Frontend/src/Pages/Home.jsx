@@ -21,6 +21,7 @@ const PopupCard = ({ onClose }) => {
   const [password, setPassword] = useState('');
   const [petName, setPetName] = useState('');
   const [petImage, setPetImage] = useState('');
+  const [petImageUrl, setPetImageUrl] = useState(''); 
   const [breed, setBreed] = useState('');
   const [gender, setGender] = useState('');
   const [age, setAge] = useState('');
@@ -87,6 +88,7 @@ const PopupCard = ({ onClose }) => {
     const file = event.target.files[0]; // Get the first selected file
     console.log('Selected image file:', file); // Log the selected file to the console
     setPetImage(file); // Assuming you have a state variable to store the selected image
+    setPetImageUrl(URL.createObjectURL(file));
   };
   
 
@@ -144,10 +146,12 @@ const PopupCard = ({ onClose }) => {
             <div className="right-card">
               <h3>Pet Details</h3>
               <div className="pet-image">
-                <label htmlFor="pet-image-input">
-                  <input type="file" id="pet-image-input" accept="image/*" className="circular-input" onChange={handleChangePetImage} />
-                  <p className='addpetimg'>Add Pet Image</p>
-                </label>
+              <label htmlFor="pet-image-input">
+                <input type="file" id="pet-image-input" accept="image/*" className="circular-input" onChange={handleChangePetImage} />
+                {petImageUrl && <p className='addpetimg'>Image Added</p>}
+                {!petImageUrl && <p className='addpetimg'>Add Pet Image</p>}
+              </label>
+
               </div>
               <input type="text" placeholder="Pet Name" value={petName} onChange={handleChangePetName} />
               <div className="breed-gender">
@@ -258,8 +262,8 @@ const LoginPopupCard = ({ onClose, onLoginSuccess  }) => {
         <h2 className="titlesLogin">Login</h2>
         <div className="form-containers">
           <div className="login-card">
-            <input type="email" ref={emailRef} />
-            <input type="password" ref={passwordRef} />
+            <input type="email" ref={emailRef} placeholder='Enter Your Email'/>
+            <input type="password" ref={passwordRef} placeholder='Enter Your Password'/>
           </div>
         </div>
         <button className="close-btn" onClick={onClose}>

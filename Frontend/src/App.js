@@ -12,6 +12,8 @@ import AddAppointment from './Admin/AddAppointmentPage'
 import Appointment from './Pages/Appointment'
 import ViewUsers from './Admin/ViewUserPage';
 import UserHome from './Pages/UserHome'
+import UpdateAppointmet from './Admin/UpdateAppointmentPage'
+import UpdateUser from './Admin/UpdateUserPage'
 
 
 
@@ -31,7 +33,9 @@ function App() {
           <Route path="/add-appointment" element={<AddAppointment />} />
           <Route path="/appointment" element={<Appointment />} />
           <Route path="/view-users" element={<ViewUsers />} />
-          <Route path="/user-home" element={<UserHome />} />    
+          <Route path="/user-home" element={<UserHome />} />   
+          <Route path="/update-appointment/:id" element={<UpdateAppointmet />} />   
+          <Route path="/update-user/:id" element={<UpdateUser />} />   
         </Routes>
       </div>
     </Router>

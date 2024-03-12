@@ -1,16 +1,25 @@
 import React from 'react';
 import AdminLayout from './AdminLayout';
-import UpdateAppointmentForm from './UpdateAppointmentForm';
-
+import UpdateAppointmentForm from './UpdateAppointments';
+import Navbar from '../Components/Navbar';
+import AdminSidebar from './MainAdmin';
+import Footer from '../Components/Footer';
+import './UpdateAppointmentPage.css'
 
 const UpdateAppointmentPage = () => {
   return (
-    <AdminLayout>
-      <h2>Update Appointment</h2>
-      <UpdateAppointmentForm />
-    </AdminLayout>
+    <div>
+      <Navbar />
+      <div className='admin-content'>
+        <AdminSidebar />
+        <div className="add-appointment-form">
+          <h3 className='addappointment'>Update Appointment</h3>
+          <UpdateAppointmentForm />
+        </div>
+      </div>
+      <Footer />  
+    </div>
   );
 };
 
-
-export { UpdateAppointmentPage };
+export default UpdateAppointmentPage;

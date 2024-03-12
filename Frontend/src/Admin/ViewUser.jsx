@@ -23,6 +23,8 @@ const ViewUsers = () => {
     try {
       // Perform the update operation here, for example, redirect to an update page
       console.log(`Updating user with id ${id}`);
+      const updateUrl = `../update-user/${id}`;
+      window.location.href = updateUrl;
       // You can use history.push() to navigate to the update page
       // history.push(`/update-user/${id}`);
     } catch (error) {

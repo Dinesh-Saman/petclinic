@@ -19,10 +19,9 @@ const ViewAppointments = () => {
 
   const handleUpdate = async (id) => {
     try {
-      // Perform the update operation here, for example, redirect to an update page
       console.log(`Updating appointment with id ${id}`);
-      // You can use history.push() to navigate to the update page
-      // history.push(`/update-appointment/${id}`);
+      const updateUrl = `../update-appointment/${id}`;
+      window.location.href = updateUrl;
     } catch (error) {
       console.error('Error updating appointment:', error);
     }
